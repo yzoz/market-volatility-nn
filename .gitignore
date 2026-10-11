@@ -1,0 +1,39 @@
+# Secrets
+.env
+
+# Data and model artefacts (repo root only)
+/data/
+/models/
+/weights/
+/logs/
+/artifacts/
+/foo.csv
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+
+# Tooling caches
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.ipynb_checkpoints/
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store
+
+# TensorFlow artefacts
+*.h5
+*.keras
+events.out.tfevents.*
+
+# Harness/semantic-search caches
+.semantic-search

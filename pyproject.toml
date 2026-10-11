@@ -1,0 +1,73 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "market-volatility-nn"
+version = "1.0.0"
+description = "Deep learning for cryptocurrency volatility forecasting: an RNN regression branch and a CNN direction-classification branch."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "YZoZ", email = "pastuhholmov@gmail.com" }]
+keywords = ["deep-learning", "time-series", "volatility", "lstm", "cnn", "forecasting"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = [
+    "numpy>=1.24",
+    "pandas>=2.0",
+    "scikit-learn>=1.3",
+    "tensorflow>=2.13",
+    "typer>=0.9",
+    "python-dotenv>=1.0",
+    "PyYAML>=6.0",
+]
+
+[project.optional-dependencies]
+data = ["binance-historical-data>=0.0.1"]
+live = ["influxdb-client>=1.36"]
+viz = ["matplotlib>=3.7"]
+dev = [
+    "pytest>=7.4",
+    "pytest-cov>=4.1",
+    "ruff>=0.4",
+    "matplotlib>=3.7",
+]
+
+[project.scripts]
+volnn = "volnn.cli:app"
+
+[project.urls]
+Homepage = "https://github.com/YZoZ/market-volatility-nn"
+Source = "https://github.com/YZoZ/market-volatility-nn"
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "W"]
+# B008: Typer/argparse require calls in argument defaults — that is idiomatic.
+ignore = ["E501", "B008"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["volnn"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+addopts = "-q"
+filterwarnings = ["ignore::DeprecationWarning"]
